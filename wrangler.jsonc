@@ -1,0 +1,22 @@
+{
+  // WEBSITE DESTROYER – one Cloudflare Worker that serves the game (static assets) and the /api/* backend.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "website-destroyer",
+  "main": "src/index.js",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // The game itself. Only /api/* runs the Worker; everything else is served as a static file.
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+
+  // Real-page capture (Cloudflare Browser Rendering).
+  "browser": { "binding": "BROWSER" },
+
+  // Global leaderboard (Cloudflare D1).  Run: npx wrangler d1 create website-destroyer  and paste the id below.
+  "d1_databases": [
+    { "binding": "DB", "database_name": "website-destroyer", "database_id": "PASTE_YOUR_D1_DATABASE_ID_HERE", "migrations_dir": "migrations" }
+  ],
+
+  "vars": { "TOTAL_MS": "22000", "SNAP_PER_MIN": "6", "SCORE_PER_10MIN": "6" }
+  // Secret (NOT stored here):  npx wrangler secret put SCORE_SECRET
+}
