@@ -1,4 +1,4 @@
-# WEBSITE DESTROYER v2 – side-scrolling 2D arcade (Phaser 3 + TypeScript) on Cloudflare
+# WEBSITE DESTROYER v2 – side-scrolling 2D arcade 
 
 Paste a link → the Worker opens the **real page** in a headless browser → the game turns that picture into a **side-scrolling level**
 (the page is made of destructible blocks, the floor and ledges are platforms) and you have 60 seconds to destroy it:
